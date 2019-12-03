@@ -56,7 +56,7 @@ class Stomach(object):
         self.check_header(auth)
         self.check_nonce(auth)
 
-        hA1 = self.get_key(auth.username)
+        hA1 = hash_all(auth.username, auth.realm, self.get_key(auth.username))
         hA2 = hash_all(request.method, auth.uri)
         if hA1 is None: raise Unauthorized()
 
@@ -104,7 +104,7 @@ class Stomach(object):
         response = make_response(response)
         auth = request.authorization
 
-        hA1 = self.get_key(auth.username)
+        hA1 = hash_all(auth.username, auth.realm, self.get_key(auth.username))
         hA2 = hash_all('', auth.uri)
         rspauth = digest(hA1, hA2)
 
