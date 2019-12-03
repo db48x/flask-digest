@@ -10,7 +10,7 @@ class Challenge(Unauthorized):
         nonce = stomach.gen_nonce()
         qop = stomach.qop
 
-        self.config = (realm, nonce, [qop], None, 'MD5', stale)
+        self.config = (realm, nonce, [qop], None, 'SHA-256', stale)
 
     def get_response(self, environ=None):
         response = Unauthorized.get_response(self, environ)
