@@ -3,8 +3,7 @@ from flask import request
 
 def hash_all(*args):
     strings = map(str, args)
-    hashed = md5(':'.join(strings))
-    return hashed.hexdigest()
+    return md5(bytes(':'.join(strings), 'utf-8')).hexdigest()
 
 def digest(hA1, hA2):
     auth = request.authorization

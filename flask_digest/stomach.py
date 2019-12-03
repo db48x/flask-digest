@@ -6,9 +6,9 @@ from werkzeug.exceptions import Unauthorized
 from werkzeug.http import dump_header
 from functools import wraps
 
-from hasher import digest, hash_all
-from challenge import Challenge
-from cleaning import Maid
+from .hasher import digest, hash_all
+from .challenge import Challenge
+from .cleaning import Maid
 
 class Token(object):
     def __init__(self):
@@ -92,7 +92,7 @@ class Stomach(object):
 
     def gen_nonce(self):
         while True:
-            nonce = urandom(8).encode('hex')
+            nonce = urandom(8).hex()
             if nonce not in self.tokens: break
             if self.tokens[nonce].stale(): break
 
