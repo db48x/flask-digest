@@ -65,8 +65,8 @@ class Stomach(object):
 
     def check_header(self, auth):
         uri = request.path
-        if request.query_string:
-            uri += '?' + request.query_string
+        if request.query_string != b'':
+            uri += '?' + request.query_string.decode('utf-8')
 
         bad_uri = auth.uri != uri
         bad_qop = str(auth.qop) != self.qop
